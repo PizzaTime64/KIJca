@@ -61,7 +61,7 @@ $issuer = new File_X509();
 $issuer->setPrivateKey($CAPrivKey);
 $issuer->loadX509(file_get_contents('kijCA.crt'));
 //$issuer->setDNProp('KIJ C CA', 'Certificate authority');
-$issuer->setDomain('hadrianbs.web.id');
+//$issuer->setDomain('hadrianbs.web.id');
 $issuer->setDN($issuer->getDN());
 
 
