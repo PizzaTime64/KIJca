@@ -52,7 +52,6 @@ include('connection.php');
                         if (!$query) {
                             mysql_errno($connection);
                         }
-                        mysql_close($connection); // Closing Connection
                         ?>
                         <table class="table">
                             <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Signed</th></tr>
@@ -86,7 +85,6 @@ include('connection.php');
                         if (!$query) {
                             die('Invalid query: ' . mysql_error());
                         }
-                        mysql_close($connection); // Closing Connection
                         ?>
                         <table class="table">
                             <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Sign</th></tr>
@@ -102,13 +100,12 @@ include('connection.php');
                             echo "<td>" . $row['orgUnit'] . "</td>";
                             echo "<td>" . $row['name'] . "</td>";
                             echo "<td>" . $row['email'] . "</td>";
-                            echo "<td>" ;
+                            echo "<td>";
                             ?>
 
-                            <form action="" method="post">
+                            <form action="signcert.php" method="post">
                                 <input type="hidden" id="id" name="id" value="<?php echo $row['id'] ?>">
-                                <button class="btn btn-default" type="submit">Sign</button>
-
+                                <button class="btn btn-default" type="submit">Sign</button>               
                             </form>
                             <?php
                             echo "</td>";
