@@ -42,15 +42,81 @@ include('viewCsrBack.php'); // Includes Login Script
         <div id="page-wrapper">
 
             <div class="container-fluid">
-                <h3> Add Certificate Sign Request</h3>
-                <form action="" method="post">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Certificate Sign Request</label>
-                <textarea class="form-control" rows="10" id="csr" name="csr" placeholder="Paste your .csr here"></textarea>
-              </div>
-              <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Submit">Submit</button>
-             
-            </form>
+                <h3>Certificate Sign Request</h3>
+                <?php
+                    if($level_session == 'user'){
+                        // SQL query
+                        $query = mysql_query("select * from tblcertificate where owner = '$login_session'", $connection);
+                        if (!$query) {
+                            die('Invalid query: ' . mysql_error());
+                        }
+                        mysql_close($connection); // Closing Connection
+                        ?>
+                        <table class="table">
+                            <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Signed</th><th>Revoked</th></tr>
+                            <?php 
+                            //print_r($row);
+                            while($row = mysql_fetch_array($query)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $row['country'] . "</td>";
+                            echo "<td>" . $row['state'] . "</td>";
+                            echo "<td>" . $row['locality'] . "</td>";
+                            echo "<td>" . $row['org'] . "</td>";
+                            echo "<td>" . $row['orgUnit'] . "</td>";
+                            echo "<td>" . $row['name'] . "</td>";
+                            echo "<td>" . $row['email'] . "</td>";
+                            //$file = $row['pubKey'];
+                            
+                            //echo "<td><a href='viewscr.php?download=true'>Public Key</a><td>";
+                            
+                            //echo "<td>" . $row['pubKey'] . "</td>";
+                            echo "<td>" . $row['signed'] . "</td>";
+                            echo "<td>" . $row['revoked'] . "</td>";
+                            echo "</tr>";
+                            }
+                            ?>
+                        </table>
+                        <?php
+                    }
+                    else if($level_session == 'admin'){
+                         // SQL query
+                        $query = mysql_query("select * from tblcertificate where signed = 0;", $connection);
+                        if (!$query) {
+                            die('Invalid query: ' . mysql_error());
+                        }
+                        mysql_close($connection); // Closing Connection
+                        ?>
+                        <table class="table">
+                            <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Sign</th></tr>
+                            <?php 
+                            //print_r($row);
+                            while($row = mysql_fetch_array($query)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $row['country'] . "</td>";
+                            echo "<td>" . $row['state'] . "</td>";
+                            echo "<td>" . $row['locality'] . "</td>";
+                            echo "<td>" . $row['org'] . "</td>";
+                            echo "<td>" . $row['orgUnit'] . "</td>";
+                            echo "<td>" . $row['name'] . "</td>";
+                            echo "<td>" . $row['email'] . "</td>";
+                            ?>
+                            <form action="" method="post">
+                                <input type="hidden" value="Submit">
+                                <button class="btn btn-default" type="submit">Sign</button>
+
+                            </form>
+                            <?php
+                            echo "<td>"  "</td>";
+                            echo "</tr>";
+                            }
+                            ?>
+                        </table>
+                        <?php
+                    }
+                    }
+                ?>
                 
             </div>
             <!-- /.container-fluid -->
