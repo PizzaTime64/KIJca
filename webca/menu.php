@@ -38,7 +38,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo">Certificate Signing Request <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="createcsr.php">Create CSR</a>
+                                <a href="createcsr2.php">Create CSR</a>
+                            </li>
+                            <li>
+                                <a href="createcsr.php">Import CSR</a>
                             </li>
                             <li>
                                 <a href="viewcsr.php">View CSR</a>
