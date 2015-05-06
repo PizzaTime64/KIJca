@@ -1,5 +1,5 @@
 <?php
-include('createCsrBack.php'); // Includes Login Script
+include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,17 +42,7 @@ include('createCsrBack.php'); // Includes Login Script
         <div id="page-wrapper">
 
             <div class="container-fluid">
-                <h3> Add Certificate Sign Request</h3>
-                <form action="" method="post">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Certificate Sign Request</label>
-                <textarea class="form-control" rows="10" id="csr" name="csr" placeholder="Paste your .csr here"></textarea>
-              </div>
-              <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Submit">Submit</button>
-             
-            </form>
-            <?php echo $msg; ?>
-                
+                <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
             </div>
             <!-- /.container-fluid -->
 

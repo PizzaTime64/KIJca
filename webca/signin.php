@@ -1,3 +1,10 @@
+<?php
+include('signinBack.php'); // Includes Login Script
+
+if(isset($_SESSION['login_user'])){
+header("location: home.php");
+}
+?>
 <!DOCTYPE html>
 <!-- saved from url=(0040)http://getbootstrap.com/examples/signin/ -->
 <html lang="en"><meta style="visibility: hidden !important; display: block !important; width: 0px !important; height: 0px !important; border-style: none !important;"><embed id="__IDM__" type="application/x-idm-downloader" width="1" height="1" style="visibility: hidden !important; display: block !important; width: 1px !important; height: 1px !important; border-style: none !important; position: absolute !important; top: 0px !important; left: 0px !important;"></meta><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,22 +39,22 @@
 
     <div class="container">
         <h3> KIJ CA </h3>
-      <form class="form-signin">
+      <form class="form-signin" action="" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" id="name" name="username" class="form-control" placeholder="Username" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <h5 class="form-signup-heading"> Haven't an acoount? </h5> <a href="Signup.html">Sign Up</a>
+        <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Login">Sign in</button>
+        <h5 class="form-signup-heading"> Haven't an acoount? </h5> <a href="signup.php">Sign Up</a>
 
       </form>
-
+      <span><?php echo $error;?></span>
     </div> <!-- /container -->
 
 

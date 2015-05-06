@@ -1,3 +1,10 @@
+<?php
+include('signupBack.php'); // Includes Login Script
+
+if(isset($_SESSION['login_user'])){
+header("location: profile.php");
+}
+?>
 <!DOCTYPE html>
 <!-- saved from url=(0040)http://getbootstrap.com/examples/signin/ -->
 <html lang="en"><meta style="visibility: hidden !important; display: block !important; width: 0px !important; height: 0px !important; border-style: none !important;"><embed id="__IDM__" type="application/x-idm-downloader" width="1" height="1" style="visibility: hidden !important; display: block !important; width: 1px !important; height: 1px !important; border-style: none !important; position: absolute !important; top: 0px !important; left: 0px !important;"></meta><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,24 +41,25 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <form>
+    <form action="" method="post">
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+          <label for="exampleInputEmail1">Username</label>
+          <input class="form-control" id="name" name="username" placeholder="username" placeholder="Enter username">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <input type="password" class="form-control" id="password" name="password" placeholder="**********" placeholder="Password">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Re enter password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <input type="password" class="form-control"id="repassword" name="repassword" placeholder="**********" placeholder="Password">
         </div>
         
         
-        <button type="submit" class="btn btn-default">Sign Up</button>
+        <button name="submit" type="submit" value=" Sign Up ">Sign Up</button>
       </form>
   </div>
+   <span><?php echo $error;?></span>
   <div class="col-md-4"></div>
 </div>
       
