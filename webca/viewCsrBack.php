@@ -1,19 +1,21 @@
 <?php
 include('session.php');
 		
-// SQL query
-		$query = mysql_query("", $connection);
-		if ($query) {
-			$msg = "Certificate Signing Request was submitted";
-		} else {
-			$error = "Cannot submit Certificate Signing Request";
-			echo 'taes';
-			die('Invalid query: ' . mysql_error());
-		}
-		mysql_close($connection); // Closing Connection
+if($level_session == 'user'){
+	// SQL query
+	$query = mysql_query("select * from tblcertificate where owner = '$login_session'", $connection);
+	if ($query) {
+		$row = mysql_fetch_array($query);
+	} else {
+		$error = "Cannot";
+		die('Invalid query: ' . mysql_error());
 	}
-	
+	mysql_close($connection); // Closing Connection
 }
+
+	
+	
+
 
 
 ?>

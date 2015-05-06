@@ -1,5 +1,5 @@
 <?php
-include('createCsrBack.php'); // Includes Login Script
+include('viewCsrBack.php'); // Includes Login Script
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,6 @@ include('createCsrBack.php'); // Includes Login Script
               <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit" value="Submit">Submit</button>
              
             </form>
-            <?php echo $msg; ?>
                 
             </div>
             <!-- /.container-fluid -->
