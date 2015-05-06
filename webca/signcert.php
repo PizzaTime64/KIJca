@@ -47,14 +47,21 @@ $pubKey->setPublicKey();
 
 $subject = new File_X509();
 $subject->setPublicKey($pubKey);
-$subject->setDNProp($country, $org, $name, $state, $locality, $serial);
-$subject->setDomain('hadrianbs.web.id');
+//$subject->setDNProp($country, $org, $name, $state, $locality, $serial);
+$subject->setDNProp('id-at-countryName', $country);
+$subject->setDNProp('id-at-organizationName', $org);
+$subject->setDNProp('id-at-commonName', $name);
+$subject->setDNProp('id-at-stateOrProvinceName', $state);
+$subject->setDNProp('id-at-localityName', $locality);
+$subject->setDNProp('id-at-serialNumber', $serial);
+//$subject->setDomain('hadrianbs.web.id');
 
 
 $issuer = new File_X509();
 $issuer->setPrivateKey($CAPrivKey);
-$issuer->setDNProp('KIJ C CA', 'Certificate authority');
-$issuer->setDomain('hadrianbs.web.id/kijca');
+$issuer->loadX509(file_get_contents('kijCA.crt'));
+//$issuer->setDNProp('KIJ C CA', 'Certificate authority');
+$issuer->setDomain('hadrianbs.web.id');
 $issuer->setDN($issuer->getDN());
 
 
@@ -77,6 +84,6 @@ $hasil = mysql_query($query);
 if($hasil === FALSE) { 
     die(mysql_error()); // TODO: better error handling
 }
-header('Location: viewscr.php');
+header('Location: viewcsr.php');
 }
 ?>
