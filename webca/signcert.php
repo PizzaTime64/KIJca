@@ -11,7 +11,7 @@ $id = $_POST['id'];
 
 // Load CA privaate key from file "ca.key"
 $CAPrivKey = new Crypt_RSA();
-$privatekeyfile = fopen("ca.key", "r");
+$privatekeyfile = fopen("kijCA.key", "r");
 $privatekey = fread($privatekeyfile, 4096);
 $CAPrivKey->loadKey($privatekey);
 
