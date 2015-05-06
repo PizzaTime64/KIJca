@@ -55,7 +55,7 @@ include('connection.php');
                         mysql_close($connection); // Closing Connection
                         ?>
                         <table class="table">
-                            <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Signed</th><th>Revoked</th></tr>
+                            <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Signed</th></tr>
                             <?php 
                             //print_r($row);
                             while($row = mysql_fetch_array($query)) {
@@ -74,7 +74,6 @@ include('connection.php');
                             
                             //echo "<td>" . $row['pubKey'] . "</td>";
                             echo "<td>" . $row['signed'] . "</td>";
-                            echo "<td>" . $row['revoked'] . "</td>";
                             echo "</tr>";
                             }
                             ?>
