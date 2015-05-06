@@ -1,6 +1,26 @@
 <?php
 include('viewCsrBack.php'); // Includes Login Script
 include('connection.php');
+if(isset($_GET['insert'])){
+        insert();
+    }
+function DownloadFile() { // $file = include path 
+        if(file_exists($file)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename='.basename($file));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            ob_clean();
+            flush();
+            readfile($file);
+            exit;
+        }
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,14 +68,14 @@ include('connection.php');
                     if($level_session == 'user'){
                         // SQL query
 
-                        $query = mysql_query("select * from tblcertificate where owner = '$login_session' and signed = 0;", $connection);
+                        $query = mysql_query("select * from tblcertificate where owner = '$login_session'", $connection);
                         if (!$query) {
                             mysql_errno($connection);
                         }
                         mysql_close($connection); // Closing Connection
                         ?>
                         <table class="table">
-                            <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Signed</th><th>Revoked</th></tr>
+                            <tr><th>Serial</th><th>Country</th><th>State</th><th>Locality</th><th>Org</th><th>Org Unit</th><th>Name</th><th>email</th><th>Signed</th><th>Revoked</th><th>Certificate</th></tr>
                             <?php 
                             //print_r($row);
                             while($row = mysql_fetch_array($query)) {
@@ -68,13 +88,19 @@ include('connection.php');
                             echo "<td>" . $row['orgUnit'] . "</td>";
                             echo "<td>" . $row['name'] . "</td>";
                             echo "<td>" . $row['email'] . "</td>";
-                            //$file = $row['pubKey'];
-                            
-                            //echo "<td><a href='viewscr.php?download=true'>Public Key</a><td>";
-                            
-                            //echo "<td>" . $row['pubKey'] . "</td>";
                             echo "<td>" . $row['signed'] . "</td>";
                             echo "<td>" . $row['revoked'] . "</td>";
+                            echo "<td>";
+                            $cert = $row['certificate'];
+                            ?>
+
+                            <form action="signcert.php" method="post">
+                                <input type="hidden" id="cert" name="cert" value="<?php echo $cert ?>">
+                                <button class="btn btn-default" type="submit">Download</button>
+
+                            </form>
+                            <?php
+                            echo "</td>";
                             echo "</tr>";
                             }
                             ?>
@@ -83,7 +109,7 @@ include('connection.php');
                     }
                     else if($level_session == 'admin'){
                          // SQL query
-                        $query = mysql_query("select * from tblcertificate where signed = 0;", $connection);
+                        $query = mysql_query("select * from tblcertificate", $connection);
                         if (!$query) {
                             die('Invalid query: ' . mysql_error());
                         }

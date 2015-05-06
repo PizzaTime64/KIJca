@@ -12,7 +12,7 @@ if($level_session == 'user'){
 
 if($level_session == 'admin'){
 	// SQL query
-	$query = mysql_query("select * from tblcertificate", $connection);
+	$query = mysql_query("select * from tblcertificate where owner = '$login_session'", $connection);
 	if (!$query) {
 		die('Invalid query: ' . mysql_error());
 	}

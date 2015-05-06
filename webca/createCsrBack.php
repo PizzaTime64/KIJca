@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
 		$user = $_SESSION['login_user'];
 		
 // SQL query
-		$query = mysql_query("insert into tblcertificate (id, country, state, locality, org, orgUnit, name, email, signed, revoked, owner) VALUES (NULL, '$country', '$state', '$locality', '$organization', '$organizationUnit', '$name', '$emailCert',0, 0, '$user')", $connection);
+		$query = mysql_query("insert into tblcertificate (id, country, state, locality, org, orgUnit, name, email, signed, revoked, owner, pubKey) VALUES (NULL, '$country', '$state', '$locality', '$organization', '$organizationUnit', '$name', '$emailCert',0, 0, '$user','$publicKey')", $connection);
 
 		//$query = mysql_query("update client set country='$country', state = '$state', locality = '$locality', organization = '$organization', organizationUnit = '$organizationUnit', name = '$name', emailCert = '$emailCert', pubkey = '$publicKey' where email = '$email'  ", $connection);
 		if ($query) {

@@ -41,13 +41,13 @@
                                 <a href="createcsr.php">Create CSR</a>
                             </li>
                             <li>
-                                <a href="#">View CSR</a>
+                                <a href="viewcsr.php">View CSR</a>
                             </li>
                         </ul>                    
                     </li>
                     
                     <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Certificate</a>
+                        <a href="cert.php"><i class="fa fa-fw fa-file"></i> Certificate</a>
                     </li>
                     
                 </ul>

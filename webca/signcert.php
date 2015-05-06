@@ -4,6 +4,11 @@ include('File/X509.php');
 include('Crypt/RSA.php');
 include('connection.php');
 
+if (!empty($_POST['id']) ) {
+$error = "Username or Password is invalid";
+
+$id = $_POST['id'];
+
 // Load CA privaate key from file "ca.key"
 $CAPrivKey = new Crypt_RSA();
 $privatekeyfile = fopen("ca.key", "r");
@@ -14,9 +19,8 @@ $CAPrivKey->loadKey($privatekey);
 //echo $privatekey;
 //echo "\r\n\r\n";
 
-
 //get CSR data from DB
-$query = "SELECT country, state, locality, org, orgUnit, name, email, id, pubKey FROM tblcertificate WHERE id = 7;";
+$query = "SELECT country, state, locality, org, orgUnit, name, email, id, pubKey FROM tblcertificate WHERE id = $id;";
 $hasil = mysql_query($query);
 if($hasil === FALSE) { 
     die(mysql_error()); // TODO: better error handling
@@ -61,11 +65,18 @@ $x509->setEndDate('+1 year');
 $x509->setSerialNumber(chr($serial));
 $result = $x509->sign($issuer, $subject);
 
-echo "Certificate";
+//echo "Certificate";
 //echo $privKey->getPrivateKey();
 //echo "\r\n";
 $certificate = $x509->saveX509($result, FILE_X509_FORMAT_PEM);
 $certificate = addslashes($certificate);
-echo $certificate;
-echo "\r\n";
+//echo $certificate;
+//echo "\r\n";
+$query = "update tblcertificate set certificate = '$certificate', signed = 1 where id = '$id';";
+$hasil = mysql_query($query);
+if($hasil === FALSE) { 
+    die(mysql_error()); // TODO: better error handling
+}
+header('Location: viewscr.php');
+}
 ?>
