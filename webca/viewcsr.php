@@ -105,7 +105,7 @@ include('connection.php');
                             echo "<td>" ;
                             ?>
 
-                            <form action="signcert.php" method="post">
+                            <form action="" method="post">
                                 <input type="hidden" id="id" name="id" value="<?php echo $row['id'] ?>">
                                 <button class="btn btn-default" type="submit">Sign</button>
 
